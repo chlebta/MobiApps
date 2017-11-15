@@ -2,7 +2,7 @@
 //  MobiAppsUITests.swift
 //  MobiAppsUITests
 //
-//  Created by Wael on 14/11/2017.
+//  Created by Ahmed K on 14/11/2017.
 //  Copyright © 2017 MobiApps. All rights reserved.
 //
 
