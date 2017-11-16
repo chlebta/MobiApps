@@ -2,7 +2,7 @@
 //  RequestHelper.swift
 //  MobiApps
 //
-//  Created by Norbert Billa on 06/03/2017.
+//  Created by Ahmed K on 06/03/2017.
 //  Copyright © 2017 Ahmed K. All rights reserved.
 //
 
@@ -15,10 +15,10 @@ class RequestHelper {
 
     fileprivate var url: String
     fileprivate var method: Alamofire.HTTPMethod
-    fileprivate var parameters: [String : AnyObject]?
+    fileprivate var parameters: [String : Any]?
 
 
-    init(url: String, method : Alamofire.HTTPMethod? = nil, parameters: [String : AnyObject]? = nil) {
+    init(url: String, method : Alamofire.HTTPMethod? = nil, parameters: [String : Any]? = nil) {
         self.url = url
         self.method = method ?? .get
         self.parameters = parameters

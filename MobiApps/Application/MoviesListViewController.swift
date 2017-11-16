@@ -14,34 +14,24 @@ class MoviesListViewController: UIViewController {
 
     var movies: [Movie] = []
 
+    var currentPage = 1
+    var isloadingData = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor        = Colors.primaryBackgroundColor
-        tableView.backgroundColor   = Colors.primaryBackgroundColor
-
+        title = "Discover"
         navigationController?.navigationBar.barStyle = .black
+        view.backgroundColor = Colors.primaryBackgroundColor
+        navigationController?.navigationBar.tintColor = .white
 
+        //TableView
+        tableView.backgroundColor   = Colors.primaryBackgroundColor
         tableView.register(UINib(nibName: "MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
-        APIManager.getMovies { result in
-
-            switch result
-            {
-            case .success(let movies):
-                print(movies.count)
-                self.movies = movies
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+        getData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 }
 // MARK:
@@ -58,6 +48,53 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.render(movies[indexPath.row])
         return cell
         
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let movieDetailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "movieDetailsVC") as? MovieDetailsViewController else {
+            return
+        }
+
+        movieDetailsVC.movie = movies[indexPath.row]
+        navigationController?.pushViewController(movieDetailsVC, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        // Load More
+        if !isloadingData && indexPath.row >= movies.count - 5 {
+            getData()
+        }
+
+    }
+}
+
+//MARK:
+extension MoviesListViewController {
+
+    func getData() {
+
+        guard isloadingData == false else {
+            return
+        }
+        
+        isloadingData = true
+
+        APIManager.getMovies(currentPage) { result in
+
+            switch result
+            {
+            case .success(let movies):
+                self.movies.append(contentsOf: movies)
+                self.tableView.reloadData()
+                self.currentPage += 1
+
+            case .failure(let error):
+                print(error)
+            }
+
+            self.isloadingData = false
+        }
     }
 }
 

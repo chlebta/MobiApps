@@ -13,14 +13,22 @@ typealias SuccessResponseManager = (_ success: Bool, _ error: NetworkError?) -> 
 
 class RequestManager{
 
+
     private let apiUrl:String  =  "https://api.themoviedb.org/3/"
 
     var url = ""
+    var params: [String: Any] = ["api_key": "80e05b40cdb4126029378d190074f084"]
 
-    init(endPoint: String) {
-        url = apiUrl + endPoint + "?api_key=80e05b40cdb4126029378d190074f084"
+
+    init(endPoint: String, _ params: [String: Any]? = nil) {
+        url = apiUrl + endPoint
+        if let _params = params {
+            for (key, value) in _params {
+                self.params[key] = value
+            }
+        }
+
     }
-
 
     
 }
@@ -28,10 +36,11 @@ class RequestManager{
 //MARK: ---
 //MARK: GET
 extension RequestManager {
+
     // Get a list of objects
     func getObjects<T: GenericModel>(_ completionBlock: ResultBlock<[T]>? = nil ){
         
-        RequestHelper(url: self.url).responseJSON { result in
+        RequestHelper.init(url: url, method: .get, parameters: params).responseJSON { result in
             
             switch result
             {

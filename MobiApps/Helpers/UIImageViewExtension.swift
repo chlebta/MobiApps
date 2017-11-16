@@ -10,12 +10,21 @@ import Kingfisher
 
 extension UIImageView {
 
-    func imageFromUrl(_ url: String, _ placeHolder: UIImage? = nil) {
+    func imageFromUrl(_ url: String) {
+
+        let _url = URL(string: url)!
+        self.kf.setImage(with: _url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+    }
+
+    func imageFromUrl(_ url: String, _ indicatorColor: UIColor) {
 
         let _url = URL(string: url)!
 
-        self.kf.setImage(with: _url, placeholder: placeHolder, options: nil, progressBlock: nil, completionHandler: nil)
+        //Display white indicator
+        self.kf.indicatorType = .activity
+        (self.kf.indicator?.view as? UIActivityIndicatorView)?.color = indicatorColor
 
+        self.kf.setImage(with: _url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
     }
 
 }

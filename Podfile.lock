@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (4.5.1)
   - Kingfisher (4.2.0)
+  - SimpleImageViewer (1.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - Kingfisher (~> 4.0)
+  - SimpleImageViewer (~> 1.1)
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
+  SimpleImageViewer: 293698047ffaf41e79c0c6b052ed38b218583453
 
-PODFILE CHECKSUM: 4c04fe1f6dc0e28c08ea8c8aa93da3c1d166deb8
+PODFILE CHECKSUM: 979ebeb30fa216503ec5b4ab766f32fc67883288
 
 COCOAPODS: 1.3.1

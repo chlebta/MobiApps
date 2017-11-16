@@ -8,6 +8,7 @@ target 'MobiApps' do
   # Pods for MobiApps
   pod 'Alamofire', '~> 4.5'
   pod 'Kingfisher', '~> 4.0'
+  pod 'SimpleImageViewer', '~> 1.1'
 
   target 'MobiAppsTests' do
     inherit! :search_paths

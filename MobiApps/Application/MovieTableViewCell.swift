@@ -2,7 +2,7 @@
 //  MovieTableViewCell.swift
 //  MobiApps
 //
-//  Created by Wael on 15/11/2017.
+//  Created by Ahmed K on 15/11/2017.
 //  Copyright © 2017 MobiApps. All rights reserved.
 //
 
@@ -11,12 +11,9 @@ import UIKit
 class MovieTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
-
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-
     @IBOutlet weak var descriptionLabel: UILabel!
-
     @IBOutlet weak var posterImageView: UIImageView!
     
     override func awakeFromNib() {
@@ -28,13 +25,12 @@ class MovieTableViewCell: UITableViewCell {
         descriptionLabel.textColor = Colors.gray
         noteLabel.layer.cornerRadius = 2
         noteLabel.clipsToBounds = true
-
-        accessoryType = .none
-
+        posterImageView.image = nil
 }
 
 
     func render(_ movie: Movie) {
+
         titleLabel.text = movie.title
         dateLabel.text  = movie.releaseDate
         noteLabel.text  = movie.note.description
@@ -42,6 +38,8 @@ class MovieTableViewCell: UITableViewCell {
         
         noteLabel.textColor = movie.note > 5 ? .black : .white
         noteLabel.backgroundColor = movie.note > 5 ? Colors.highRatingBackgroundColor : Colors.lowRatingBackgroundColor
+
+        posterImageView.imageFromUrl(movie.posterUrl, .white)
 
     }
 }
